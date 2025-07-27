@@ -1,95 +1,104 @@
-import os
+import requests
 import time
-from pystyle import Colors, Colorate
 from rich.console import Console
 from rich.panel import Panel
+from rich.table import Table
+from rich import box
+import sys
 
 console = Console()
 
-def banner():
-    os.system("cls" if os.name == "nt" else "clear")
-    banner_text = r"""
-████████╗██╗   ██╗ █████╗ ███╗   ██╗     █████╗ ███╗   ██╗██╗  ██╗
-╚══██╔══╝██║   ██║██╔══██╗████╗  ██║    ██╔══██╗████╗  ██║██║ ██╔╝
-   ██║   ██║   ██║███████║██╔██╗ ██║    ███████║██╔██╗ ██║█████╔╝ 
-   ██║   ██║   ██║██╔══██║██║╚██╗██║    ██╔══██║██║╚██╗██║██╔═██╗ 
-   ██║   ╚██████╔╝██║  ██║██║ ╚████║    ██║  ██║██║ ╚████║██║  ██╗
-   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝    ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝
-"""
-    console.print(Colorate.Horizontal(Colors.red_to_blue, banner_text, 2))
+def show_banner():
+    banner_text = """
+████████╗██╗   ██╗ █████╗ ███╗   ██╗ █████╗ ███╗   ██╗██╗  ██╗
+╚══██╔══╝██║   ██║██╔══██╗████╗  ██║██╔══██╗████╗  ██║██║ ██╔╝
+   ██║   ██║   ██║███████║██╔██╗ ██║███████║██╔██╗ ██║█████╔╝ 
+   ██║   ██║   ██║██╔══██║██║╚██╗██║██╔══██║██║╚██╗██║██╔═██╗ 
+   ██║   ╚██████╔╝██║  ██║██║ ╚████║██║  ██║██║ ╚████║██║  ██╗
+   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝
+    """
+    console.print(Panel(banner_text, title="[bold green]TOOL MENU BY TUAN ANH[/bold green]", border_style="blue", subtitle="Zalo: 0878933844"))
 
-def menu():
-    banner()
-    console.print(Panel.fit("[bold cyan]MENU TOOL - CODE BY TUAN ANH[/bold cyan]", border_style="blue"))
+def show_menu():
+    table = Table(title="[bold yellow]Danh sách các tool có sẵn[/bold yellow]", box=box.SQUARE)
 
-    console.print("""
-[bold yellow][3][/bold yellow] Tool Đào Mail
-  [3.1] TOOL ĐÀO MAIL
-  [3.2] TOOL ĐÀO MAIL FULL MAIL
-  [3.3] TOOL CHECK LIVE/DIE
-  [3.4] TOOL CHECK VALID
-  [3.5] TOOL REG ACC GARENA
+    table.add_column("Mã", justify="center", style="cyan", no_wrap=True)
+    table.add_column("Tên Tool", justify="left", style="magenta")
 
-[bold yellow][4][/bold yellow] Tool Đào & Check Proxies
-  [4.1] TOOL CHECK LIVE/DIE [V1]
-  [4.2] TOOL CHECK LIVE/DIE [V2]
-  [4.3] TOOL CHECK LIVE/DIE [V3 VIP]
-  [4.4] TOOL ĐÀO PROXY [V1]
-  [4.5] TOOL ĐÀO PROXY [V2]
-  [4.6] TOOL ĐÀO PROXY [V3]
-  [4.7] TOOL ĐÀO PROXY [V4]
-  [4.8] TOOL ĐÀO PROXY [V5 VIP]
+    table.add_row("3.1", "Tool Đào Mail")
+    table.add_row("3.2", "Tool Đào Mail Full Mail")
+    table.add_row("3.3", "Tool Check Live/Die Email")
+    table.add_row("3.4", "Tool Check Email Valid")
+    table.add_row("3.5", "Tool Reg Acc Garena")
 
-[bold yellow][5][/bold yellow] Tool Encode & Decode
-  [5.2] TOOL DEC Kramer-Specter_Deobf
-  [5.3] TOOL dump_marshal
-  [5.4] TOOL Convert_Marshal-PYC
+    table.add_row("4.1", "Check Proxy Live/Die V1")
+    table.add_row("4.2", "Check Proxy Live/Die V2")
+    table.add_row("4.3", "Check Proxy Live/Die V3 VIP")
+    table.add_row("4.4", "Đào Proxy V1")
+    table.add_row("4.5", "Đào Proxy V2")
+    table.add_row("4.6", "Đào Proxy V3")
+    table.add_row("4.7", "Đào Proxy V4")
+    table.add_row("4.8", "Đào Proxy V5 VIP")
 
-[bold yellow][8][/bold yellow] TOOL Reg ACC Facebook
-""", style="bold white")
+    table.add_row("5.2", "Tool Decode Kramer‑Specter")
+    table.add_row("5.3", "Tool dump_marshal")
+    table.add_row("5.4", "Tool Convert Marshal‑PYC")
 
-    chon = input(Colorate.Horizontal(Colors.blue_to_purple, "\n[?] Nhập số để chọn tool: ", 2))
+    table.add_row("8", "Tool Reg Facebook")
 
-    if chon == "3.1":
-        exec(requests.get("https://raw.githubusercontent.com/Khanh23047/Tool/main/Mail_1.py").text)
-    elif chon == "3.2":
-        exec(requests.get("https://raw.githubusercontent.com/Khanh23047/Tool/main/Mail_2.py").text)
-    elif chon == "3.3":
-        exec(requests.get("https://raw.githubusercontent.com/Khanh23047/Tool/main/Mail_3.py").text)
-    elif chon == "3.4":
-        exec(requests.get("https://raw.githubusercontent.com/Khanh23047/Tool/main/Mail_4.py").text)
-    elif chon == "3.5":
-        exec(requests.get("https://raw.githubusercontent.com/Khanh23047/Tool/main/Reg_Garena.py").text)
+    table.add_row("0", "[red]Thoát Tool[/red]")
 
-    elif chon == "4.1":
-        exec(requests.get("https://raw.githubusercontent.com/Khanh23047/Tool/main/Check_Proxy_V1.py").text)
-    elif chon == "4.2":
-        exec(requests.get("https://raw.githubusercontent.com/Khanh23047/Tool/main/Check_Proxy_V2.py").text)
-    elif chon == "4.3":
-        exec(requests.get("https://raw.githubusercontent.com/Khanh23047/Tool/main/Check_Proxy_V3.py").text)
-    elif chon == "4.4":
-        exec(requests.get("https://raw.githubusercontent.com/Khanh23047/Tool/main/Get_Proxy_V1.py").text)
-    elif chon == "4.5":
-        exec(requests.get("https://raw.githubusercontent.com/Khanh23047/Tool/main/Get_Proxy_V2.py").text)
-    elif chon == "4.6":
-        exec(requests.get("https://raw.githubusercontent.com/Khanh23047/Tool/main/Get_Proxy_V3.py").text)
-    elif chon == "4.7":
-        exec(requests.get("https://raw.githubusercontent.com/Khanh23047/Tool/main/Get_Proxy_V4.py").text)
-    elif chon == "4.8":
-        exec(requests.get("https://raw.githubusercontent.com/Khanh23047/Tool/main/Get_Proxy_V5.py").text)
+    console.print(table)
 
-    elif chon == "5.2":
-        exec(requests.get("https://raw.githubusercontent.com/Khanh23047/Tool/main/Kramer-Specter_Deobf.py").text)
-    elif chon == "5.3":
-        exec(requests.get("https://raw.githubusercontent.com/Khanh23047/Tool/main/dump_marshal.py").text)
-    elif chon == "5.4":
-        exec(requests.get("https://raw.githubusercontent.com/Khanh23047/Tool/main/Convert_Marshal-PYC.py").text)
+def run_tool(choice: str):
+    if choice == "0":
+        console.print("[bold red]👉 Đã thoát tool. Tạm biệt bạn![/bold red]")
+        sys.exit()
 
-    elif chon == "8":
-        exec(requests.get("https://raw.githubusercontent.com/Khanh23047/Tool/main/Reg_Facebook.py").text)
+    base_url = "https://raw.githubusercontent.com/helloanhem07-2809/banner.py/main/tool/"
+    tools = {
+        "3.1": "dao_mail.py",
+        "3.2": "dao_mail_full.py",
+        "3.3": "check_email_live.py",
+        "3.4": "check_email_valid.py",
+        "3.5": "reg_garena.py",
+
+        "4.1": "check_proxy_v1.py",
+        "4.2": "check_proxy_v2.py",
+        "4.3": "check_proxy_v3.py",
+        "4.4": "dao_proxy_v1.py",
+        "4.5": "dao_proxy_v2.py",
+        "4.6": "dao_proxy_v3.py",
+        "4.7": "dao_proxy_v4.py",
+        "4.8": "dao_proxy_v5.py",
+
+        "5.2": "kramer_deobf.py",
+        "5.3": "dump_marshal.py",
+        "5.4": "convert_marshal_pyc.py",
+
+        "8": "reg_facebook.py"
+    }
+
+    if choice in tools:
+        try:
+            url = base_url + tools[choice]
+            console.print(f"[blue]→ Đang tải:[/blue] {url}")
+            code = requests.get(url).text
+            exec(code, {})
+        except Exception as e:
+            console.print(f"[red]Lỗi khi chạy tool:[/red] {e}")
     else:
-        print(Colorate.Horizontal(Colors.red_to_yellow, "[!] Không hợp lệ, thử lại...", 2))
-        time.sleep(2)
-        menu()
+        console.print("[bold red]❌ Mã không hợp lệ. Vui lòng chọn lại.[/bold red]")
 
-menu()
+def main():
+    while True:
+        show_banner()
+        show_menu()
+        choice = console.input("[bold green]Nhập mã tool muốn chạy:[/bold green] ").strip()
+        run_tool(choice)
+        input("\n[bold yellow]Nhấn Enter để quay lại menu...[/bold yellow]")
+        console.clear()
+
+if __name__ == "__main__":
+    main()
+    
